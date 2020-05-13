@@ -28,4 +28,16 @@ public class RuleTest {
         Assert.assertEquals(3, result.getNumOfA());
         Assert.assertEquals(0, result.getNumOfB());
     }
+
+    @Test
+    public void should_return_xAyB_when_x_numbers_position_is_right_and_y_numbers_position_is_wrong_given_x_and_y_numbers_is_right() {
+        String base = "1234";
+        Rule rule = new Rule(base);
+
+        Result result = rule.compare("3245");
+
+        Assert.assertEquals(1, result.getNumOfA());
+        Assert.assertEquals(2, result.getNumOfB());
+    }
+    
 }

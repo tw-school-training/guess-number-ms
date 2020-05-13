@@ -39,5 +39,16 @@ public class RuleTest {
         Assert.assertEquals(1, result.getNumOfA());
         Assert.assertEquals(2, result.getNumOfB());
     }
-    
+
+    @Test
+    public void should_return_0AyB_when_y_numbers_position_is_right_given_y_numbers_is_right() {
+        String base = "1234";
+        Rule rule = new Rule(base);
+
+        Result result = rule.compare("4320");
+
+        Assert.assertEquals(0, result.getNumOfA());
+        Assert.assertEquals(3, result.getNumOfB());
+    }
+
 }

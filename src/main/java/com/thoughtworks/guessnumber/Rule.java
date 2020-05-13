@@ -12,16 +12,14 @@ public class Rule {
         int numOfA = 0;
         int numOfB = 0;
         for (int i = 0; i < value.length(); i++) {
-            char tmp = value.charAt(i);
-            for (int j = 0; j < this.base.length(); j++) {
-                char baseChar = this.base.charAt(j);
-                if (baseChar == tmp) {
-                    if (i == j) {
-                        numOfA++;
-                    } else {
-                        numOfB++;
-                    }
-                }
+            int index = this.base.indexOf(value.charAt(i));
+            if (index == -1) {
+                continue;
+            }
+            if (index == i) {
+                numOfA++;
+            } else {
+                numOfB++;
             }
         }
         return Result.builder().numOfA(numOfA).numOfB(numOfB).build();

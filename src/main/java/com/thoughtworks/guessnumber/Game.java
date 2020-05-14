@@ -22,7 +22,7 @@ public class Game {
         }
 
         if (!answer.matches(ANSWER_PATTERN) || existsRepeatingNumbers(answer)) {
-            throw new GameAnswerException();
+            throw new GameAnswerException("Wrong Input, Input again.");
         }
 
         guessTimes++;

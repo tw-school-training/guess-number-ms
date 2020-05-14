@@ -57,7 +57,9 @@ Input     Output        Instruction
 Game有以下几个场景：
 1. 游戏失败
 2. 游戏获胜
-3. 游戏输入错误
+3. 游戏结束后，继续游戏将抛出异常
+4. 游戏输入错误
+
 
 ## Tasking
 

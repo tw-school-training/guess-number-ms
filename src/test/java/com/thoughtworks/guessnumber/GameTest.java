@@ -24,4 +24,18 @@ public class GameTest {
 
     }
 
+    @Test
+    public void should_win_when_guess_number() {
+        String number = "1234";
+        Generator generator = Mockito.mock(Generator.class);
+        Mockito.when(generator.generate()).thenReturn("1234");
+
+        Game game = new Game(generator);
+        Outcome outcome = game.guess(number);
+
+        Assert.assertTrue(outcome.isWinning());
+        Assert.assertEquals(4, outcome.getCompareResult().getNumOfA());
+        Assert.assertEquals(0, outcome.getCompareResult().getNumOfB());
+        Assert.assertEquals(number, outcome.getUserGuess());
+    }
 }

@@ -16,17 +16,17 @@ public class Game {
         rule = new Rule(answer);
     }
 
-    public Outcome guess(String number) {
+    public Outcome guess(String answer) {
         if (isGameOver) {
             throw new GameOverException();
         }
 
-        if (!number.matches(ANSWER_PATTERN)) {
+        if (!answer.matches(ANSWER_PATTERN) || existsRepeatingNumbers(answer)) {
             throw new GameAnswerException();
         }
 
         guessTimes++;
-        Result result = rule.compare(number);
+        Result result = rule.compare(answer);
         boolean winning = result.getNumOfA() == 4;
         isGameOver = winning || guessTimes == MAX_GUESS_TIMES;
 
@@ -34,6 +34,16 @@ public class Game {
                 .compareResult(result)
                 .isWinning(winning)
                 .leftTimes(MAX_GUESS_TIMES - guessTimes)
-                .userGuess(number).build();
+                .userGuess(answer).build();
+    }
+
+    private boolean existsRepeatingNumbers(String number) {
+        for (int charIndex = 0; charIndex < number.length(); charIndex++) {
+            char ch = number.charAt(charIndex);
+            if (number.lastIndexOf(ch) != charIndex) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -61,4 +61,14 @@ public class GameTest {
         Game game = new Game(generator);
         game.guess(number);
     }
+
+    @Test(expected = GameAnswerException.class)
+    public void should_throw_game_answer_exception_when_guess_number_given_answers_contains_repeating_numbers() {
+        String number = "1212";
+        Generator generator = Mockito.mock(Generator.class);
+        Mockito.when(generator.generate()).thenReturn("1234");
+
+        Game game = new Game(generator);
+        game.guess(number);
+    }
 }

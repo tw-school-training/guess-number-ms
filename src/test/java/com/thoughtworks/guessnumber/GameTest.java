@@ -51,4 +51,14 @@ public class GameTest {
         ReflectionTestUtils.setField(game, "isGameOver", true);
         game.guess(number);
     }
+
+    @Test(expected = GameAnswerException.class)
+    public void should_throw_game_answer_exception_when_guess_number_given_answers_length_is_not_equals_4() {
+        String number = "12";
+        Generator generator = Mockito.mock(Generator.class);
+        Mockito.when(generator.generate()).thenReturn("1234");
+
+        Game game = new Game(generator);
+        game.guess(number);
+    }
 }

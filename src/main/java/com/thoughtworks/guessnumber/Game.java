@@ -2,6 +2,7 @@ package com.thoughtworks.guessnumber;
 
 public class Game {
     private static final int MAX_GUESS_TIMES = 6;
+    private static final String ANSWER_PATTERN = "^[0-9]{4}$";
     private Generator generator;
     private String answer;
     private int guessTimes;
@@ -18,6 +19,10 @@ public class Game {
     public Outcome guess(String number) {
         if (isGameOver) {
             throw new GameOverException();
+        }
+
+        if (!number.matches(ANSWER_PATTERN)) {
+            throw new GameAnswerException();
         }
 
         guessTimes++;

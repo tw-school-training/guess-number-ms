@@ -3,6 +3,7 @@ package com.thoughtworks.guessnumber;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.test.util.ReflectionTestUtils;
 
 public class GameTest {
 
@@ -37,5 +38,17 @@ public class GameTest {
         Assert.assertEquals(4, outcome.getCompareResult().getNumOfA());
         Assert.assertEquals(0, outcome.getCompareResult().getNumOfB());
         Assert.assertEquals(number, outcome.getUserGuess());
+    }
+
+    @Test(expected = GameOverException.class)
+    public void should_throw_game_over_exception_when_guess_number_given_game_over() {
+        String number = "1235";
+        Generator generator = Mockito.mock(Generator.class);
+        Mockito.when(generator.generate()).thenReturn("1234");
+
+
+        Game game = new Game(generator);
+        ReflectionTestUtils.setField(game, "isGameOver", true);
+        game.guess(number);
     }
 }

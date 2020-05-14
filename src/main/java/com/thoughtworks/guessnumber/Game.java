@@ -5,6 +5,7 @@ public class Game {
     private Generator generator;
     private String answer;
     private int guessTimes;
+    private boolean isGameOver;
     private Rule rule;
 
 
@@ -15,17 +16,19 @@ public class Game {
     }
 
     public Outcome guess(String number) {
-        if (guessTimes < MAX_GUESS_TIMES) {
-            guessTimes++;
-            Result result = rule.compare(number);
-
-            boolean winning = result.getNumOfA() == 4;
-            return Outcome.builder()
-                    .compareResult(result)
-                    .isWinning(winning)
-                    .leftTimes(MAX_GUESS_TIMES - guessTimes)
-                    .userGuess(number).build();
+        if (isGameOver) {
+            throw new GameOverException();
         }
-        return null;
+
+        guessTimes++;
+        Result result = rule.compare(number);
+        boolean winning = result.getNumOfA() == 4;
+        isGameOver = winning || guessTimes == MAX_GUESS_TIMES;
+
+        return Outcome.builder()
+                .compareResult(result)
+                .isWinning(winning)
+                .leftTimes(MAX_GUESS_TIMES - guessTimes)
+                .userGuess(number).build();
     }
 }

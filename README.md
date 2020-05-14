@@ -54,6 +54,10 @@ Input     Output        Instruction
 2. 生成的数不存在相同的数
 
 ### Game
+Game有以下几个场景：
+1. 游戏失败
+2. 游戏获胜
+3. 游戏输入错误
 
 ## Tasking
 

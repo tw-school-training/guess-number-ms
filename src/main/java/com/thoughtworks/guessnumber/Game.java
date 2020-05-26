@@ -31,12 +31,13 @@ public class Game {
         guessTimes++;
         Result result = rule.compare(answer);
         boolean winning = result.getNumOfA() == 4;
-        isGameOver = winning || guessTimes == MAX_GUESS_TIMES;
+        int leftTimes = MAX_GUESS_TIMES - guessTimes;
+        isGameOver = winning || leftTimes == 0;
 
         return Outcome.builder()
                 .compareResult(result)
                 .isWinning(winning)
-                .leftTimes(MAX_GUESS_TIMES - guessTimes)
+                .leftTimes(isGameOver ? 0 : leftTimes)
                 .userGuess(answer).build();
     }
 

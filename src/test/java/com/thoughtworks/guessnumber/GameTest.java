@@ -37,6 +37,7 @@ public class GameTest {
         Assert.assertTrue(outcome.isWinning());
         Assert.assertEquals(4, outcome.getCompareResult().getNumOfA());
         Assert.assertEquals(0, outcome.getCompareResult().getNumOfB());
+        Assert.assertEquals(0, outcome.getLeftTimes());
         Assert.assertEquals(number, outcome.getUserGuess());
     }
 

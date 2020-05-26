@@ -1,6 +1,7 @@
 package com.thoughtworks.guessnumber.controller;
 
-import com.thoughtworks.guessnumber.dto.GameRecordHistoryResponse;
+import com.thoughtworks.guessnumber.dto.GameRecordResponse;
+import com.thoughtworks.guessnumber.dto.GuessRecordResponse;
 import com.thoughtworks.guessnumber.entity.GameRecord;
 import com.thoughtworks.guessnumber.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +21,20 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping("/guess")
-    public GameRecordHistoryResponse guess(@RequestParam(value = "ticket", required = false) String ticket,
-                                           @RequestParam("user-answer") String answer) {
-        GameRecord gameRecord = gameService.guess(ticket);
-        List<GameRecord> historyGameRecords = gameService.findGameRecords();
+    public GameRecordResponse guess(@RequestParam("user-answer") String answer) {
+        GameRecord gameRecord = gameService.guess(answer);
 
-        return GameRecordHistoryResponse.builder()
+        return GameRecordResponse.builder()
                 .leftTimes(gameRecord.getLeftTimes())
-                .ticket(gameRecord.getTicket())
                 .compareResult(gameRecord.getCompareResult())
                 .userGuess(gameRecord.getUserGuess())
                 .isWinning(gameRecord.getIsWinning())
-                .guessHistory(buildHistory(historyGameRecords))
                 .build();
     }
 
-    private List<GameRecordHistoryResponse.GuessRecordResponse> buildHistory(List<GameRecord> historyGameRecords) {
+    private List<GuessRecordResponse> buildHistory(List<GameRecord> historyGameRecords) {
         return historyGameRecords.stream()
-                .map(gameRecord -> GameRecordHistoryResponse.GuessRecordResponse.builder()
+                .map(gameRecord -> GuessRecordResponse.builder()
                         .userGuess(gameRecord.getUserGuess())
                         .compareResult(gameRecord.getCompareResult())
                         .build())

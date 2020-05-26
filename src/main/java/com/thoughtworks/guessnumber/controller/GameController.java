@@ -23,7 +23,7 @@ public class GameController {
     public GameRecordHistoryResponse guess(@RequestParam(value = "ticket", required = false) String ticket,
                                            @RequestParam("user-answer") String answer) {
         GameRecord gameRecord = gameService.guess(ticket);
-        List<GameRecord> historyGameRecords = gameService.findGameRecordsByTicket(gameRecord.getTicket());
+        List<GameRecord> historyGameRecords = gameService.findGameRecords();
 
         return GameRecordHistoryResponse.builder()
                 .leftTimes(gameRecord.getLeftTimes())

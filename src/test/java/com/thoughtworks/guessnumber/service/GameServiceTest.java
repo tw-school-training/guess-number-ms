@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.List;
 import java.util.UUID;
 
 public class GameServiceTest {
@@ -59,5 +60,20 @@ public class GameServiceTest {
         Assert.assertEquals(outcome.isWinning(), gameRecord.getIsWinning());
         Assert.assertEquals("1A1B", gameRecord.getCompareResult());
         Assert.assertEquals(outcome.getUserGuess(), gameRecord.getUserGuess());
+    }
+
+    @Test
+    public void should_return_game_records_when_find_guess_history() {
+        GameRecordMapper gameRecordMapper = Mockito.mock(GameRecordMapper.class);
+        List<GameRecord> expectedGameRecords = List.of(
+                GameRecord.builder().build()
+        );
+        Mockito.when(gameRecordMapper.findGameRecordsByTicket(Mockito.any())).thenReturn(expectedGameRecords);
+
+        GameService gameService = new GameService(gameRecordMapper);
+        List<GameRecord> gameRecords = gameService.findGameRecords();
+
+        Assert.assertEquals(expectedGameRecords, gameRecords);
+
     }
 }

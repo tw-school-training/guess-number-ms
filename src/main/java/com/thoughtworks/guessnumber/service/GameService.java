@@ -57,7 +57,7 @@ public class GameService {
         return String.format("%dA%dB", compareResult.getNumOfA(), compareResult.getNumOfB());
     }
 
-    public List<GameRecord> findGameRecordsByTicket(String ticket) {
+    public List<GameRecord> findGameRecords() {
         return gameRecordMapper.findGameRecordsByTicket(ticket);
     }
 }

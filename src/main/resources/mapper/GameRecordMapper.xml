@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thoughtworks.guessnumber.mapper.GameRecordMapper">
+
+    <insert id="save" parameterType="com.thoughtworks.guessnumber.entity.GameRecord">
+        insert into game_record (id, ticket, left_times, is_winning, compare_result, user_guess)
+        values(#{id}, #{ticket}, #{leftTimes}, #{isWinning}, #{compareResult}, #{userGuess})
+    </insert>
+
+    <select id="findGameRecordsByTicket" parameterType="string" resultType="com.thoughtworks.guessnumber.entity.GameRecord">
+        select * from game_record where ticket = #{0}
+    </select>
+</mapper>

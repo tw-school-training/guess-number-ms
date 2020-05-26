@@ -6,12 +6,16 @@ import com.thoughtworks.guessnumber.Outcome;
 import com.thoughtworks.guessnumber.Result;
 import com.thoughtworks.guessnumber.entity.GameRecord;
 import com.thoughtworks.guessnumber.mapper.GameRecordMapper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Service
 public class GameService {
 
     private GameRecordMapper gameRecordMapper;
@@ -22,6 +26,7 @@ public class GameService {
         this.gameRecordMapper = gameRecordMapper;
     }
 
+    @Transactional
     public GameRecord guess(String ticket, String answer) {
         Game game;
         if (StringUtils.isEmpty(ticket)) {
@@ -52,5 +57,9 @@ public class GameService {
 
     private String buildResult(Result compareResult) {
         return String.format("%dA%dB", compareResult.getNumOfA(), compareResult.getNumOfB());
+    }
+
+    public List<GameRecord> findGameRecordsByTicket(String ticket) {
+        return gameRecordMapper.findGameRecordsByTicket(ticket);
     }
 }

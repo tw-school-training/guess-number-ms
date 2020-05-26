@@ -1,11 +1,14 @@
 package com.thoughtworks.guessnumber;
 
+import lombok.Getter;
+
 public class Game {
     private static final int MAX_GUESS_TIMES = 6;
     private static final String ANSWER_PATTERN = "^[0-9]{4}$";
     private Generator generator;
     private String answer;
     private int guessTimes;
+    @Getter
     private boolean isGameOver;
     private Rule rule;
 

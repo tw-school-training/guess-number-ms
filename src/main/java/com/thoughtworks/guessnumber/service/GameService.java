@@ -23,13 +23,18 @@ public class GameService {
     }
 
     public GameRecord guess(String ticket, String answer) {
-        Game game = null;
+        Game game;
         if (StringUtils.isEmpty(ticket)) {
             game = new Game(new Generator());
             ticket = UUID.randomUUID().toString();
             gameMap.put(ticket, game);
+        } else {
+            game = gameMap.get(ticket);
         }
         Outcome outcome = game.guess(answer);
+        if(game.isGameOver()){
+            gameMap.remove(ticket);
+        }
 
         GameRecord gameRecord = GameRecord.builder()
                 .id(UUID.randomUUID().toString())

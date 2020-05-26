@@ -11,40 +11,38 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class GameService {
 
     private GameRecordMapper gameRecordMapper;
 
-    private Map<String, Game> gameMap = new ConcurrentHashMap<>();
+    private String ticket;
+
+    private Game game;
 
     public GameService(GameRecordMapper gameRecordMapper) {
         this.gameRecordMapper = gameRecordMapper;
     }
 
     @Transactional
-    public GameRecord guess(String ticket, String answer) {
-        Game game;
-        if (StringUtils.isEmpty(ticket)) {
+    public GameRecord guess(String userAnswer) {
+        if (game == null) {
             game = new Game(new Generator());
             ticket = UUID.randomUUID().toString();
-            gameMap.put(ticket, game);
-        } else {
-            game = gameMap.get(ticket);
         }
-        Outcome outcome = game.guess(answer);
-        if(game.isGameOver()){
-            gameMap.remove(ticket);
+
+        Outcome outcome = game.guess(userAnswer);
+
+        if (game.isGameOver()) {
+            game = null;
         }
 
         GameRecord gameRecord = GameRecord.builder()
                 .id(UUID.randomUUID().toString())
                 .ticket(ticket)
-                .userGuess(answer)
+                .userGuess(userAnswer)
                 .isWinning(outcome.isWinning())
                 .leftTimes(outcome.getLeftTimes())
                 .compareResult(buildResult(outcome.getCompareResult()))

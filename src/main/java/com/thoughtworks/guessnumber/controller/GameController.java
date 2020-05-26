@@ -22,7 +22,7 @@ public class GameController {
     @GetMapping("/guess")
     public GameRecordHistoryResponse guess(@RequestParam(value = "ticket", required = false) String ticket,
                                            @RequestParam("user-answer") String answer) {
-        GameRecord gameRecord = gameService.guess(ticket, answer);
+        GameRecord gameRecord = gameService.guess(ticket);
         List<GameRecord> historyGameRecords = gameService.findGameRecordsByTicket(gameRecord.getTicket());
 
         return GameRecordHistoryResponse.builder()

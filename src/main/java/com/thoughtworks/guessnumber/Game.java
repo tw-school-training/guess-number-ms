@@ -20,7 +20,7 @@ public class Game {
             throw new GameOverException();
         }
 
-        if (AnswerFormatValidation.answerPatternNotMatch(answer) || AnswerFormatValidation.existsRepeatingNumbers(answer)) {
+        if (AnswerFormatValidation.failedValidate(answer)) {
             throw new GameAnswerException("Wrong Input, Input again.");
         }
 
@@ -34,6 +34,7 @@ public class Game {
                 .leftTimes(isGameOver ? 0 : leftTimes)
                 .userGuess(answer).build();
     }
+
 
 
 }

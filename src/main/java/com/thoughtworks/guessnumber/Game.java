@@ -21,7 +21,7 @@ public class Game {
             throw new GameOverException();
         }
 
-        if (!answer.matches(ANSWER_PATTERN) || existsRepeatingNumbers(answer)) {
+        if (answerPatternNotMatch(answer) || AnswerFormatValidation.existsRepeatingNumbers(answer)) {
             throw new GameAnswerException("Wrong Input, Input again.");
         }
 
@@ -36,13 +36,8 @@ public class Game {
                 .userGuess(answer).build();
     }
 
-    private boolean existsRepeatingNumbers(String number) {
-        for (int charIndex = 0; charIndex < number.length(); charIndex++) {
-            char ch = number.charAt(charIndex);
-            if (number.lastIndexOf(ch) != charIndex) {
-                return true;
-            }
-        }
-        return false;
+    private boolean answerPatternNotMatch(String answer) {
+        return !answer.matches(ANSWER_PATTERN);
     }
+
 }

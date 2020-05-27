@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter(AccessLevel.NONE)
 public class Result {
+    public static final int ANSWER_NUMBER = 4;
     private int numOfA;
     private int numOfB;
 
@@ -19,6 +20,6 @@ public class Result {
     }
 
     boolean isWinning() {
-        return getNumOfA() == 4;
+        return getNumOfA() == ANSWER_NUMBER;
     }
 }

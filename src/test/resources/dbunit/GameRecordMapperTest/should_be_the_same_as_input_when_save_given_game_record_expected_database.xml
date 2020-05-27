@@ -1,4 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-    <game_record id="id" ticket="expectedTicket" left_times="4" is_winning="false" compare_result="1A2B" user_guess="1234"/>
+    <game_record id="id" game_round="expectedTicket" left_times="4" is_winning="false" compare_result="1A2B" user_guess="1234"/>
 </dataset>

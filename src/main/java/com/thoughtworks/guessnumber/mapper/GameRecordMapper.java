@@ -10,5 +10,5 @@ public interface GameRecordMapper {
 
     void save(GameRecord gameRecord);
 
-    List<GameRecord> findGameRecordsByTicket(String ticket);
+    List<GameRecord> findGameRecordsByGameRound(String gameRound);
 }

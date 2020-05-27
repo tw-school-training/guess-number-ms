@@ -49,7 +49,7 @@ public class GameRecordMapperTest {
 
         List<GameRecord> expectedGameRecords = List.of(buildGameRecord());
 
-        List<GameRecord> gameRecords = gameRecordMapper.findGameRecordsByTicket("expectedTicket");
+        List<GameRecord> gameRecords = gameRecordMapper.findGameRecordsByGameRound("expectedTicket");
 
         Assert.assertEquals(1, gameRecords.size());
         Assert.assertEquals(expectedGameRecords, gameRecords);
@@ -61,7 +61,7 @@ public class GameRecordMapperTest {
                 .compareResult("1A2B")
                 .isWinning(false)
                 .leftTimes(4)
-                .ticket("expectedTicket")
+                .gameRound("expectedTicket")
                 .userGuess("1234")
                 .build();
     }

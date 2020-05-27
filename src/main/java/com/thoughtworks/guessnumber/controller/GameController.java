@@ -24,12 +24,7 @@ public class GameController {
     public GameRecordResponse guess(@RequestParam("user-answer") String answer) {
         GameRecord gameRecord = gameService.guess(answer);
 
-        return GameRecordResponse.builder()
-                .leftTimes(gameRecord.getLeftTimes())
-                .compareResult(gameRecord.getCompareResult())
-                .userGuess(gameRecord.getUserGuess())
-                .isWinning(gameRecord.isWinning())
-                .build();
+        return GameRecordResponse.getResponse(gameRecord);
     }
 
     @GetMapping("/find-guess-history")

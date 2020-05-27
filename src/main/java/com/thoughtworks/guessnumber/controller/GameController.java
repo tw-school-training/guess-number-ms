@@ -32,6 +32,11 @@ public class GameController {
                 .build();
     }
 
+    @GetMapping("/find-guess-history")
+    public List<GuessRecordResponse> findGuessHistory() {
+        return buildHistory(gameService.findGameRecords());
+    }
+
     private List<GuessRecordResponse> buildHistory(List<GameRecord> historyGameRecords) {
         return historyGameRecords.stream()
                 .map(gameRecord -> GuessRecordResponse.builder()

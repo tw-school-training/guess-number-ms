@@ -43,7 +43,7 @@ public class GameService {
                 .userGuess(userAnswer)
                 .isWinning(outcome.isWinning())
                 .leftTimes(outcome.getLeftTimes())
-                .compareResult(outcome.getCompareResult().buildResult())
+                .compareResult(outcome.getCompareResult().render())
                 .build();
 
         gameRecordMapper.save(gameRecord);

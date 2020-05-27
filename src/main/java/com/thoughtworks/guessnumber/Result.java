@@ -14,7 +14,7 @@ public class Result {
     private int numOfA;
     private int numOfB;
 
-    public String buildResult() {
+    public String render() {
         return String.format("%dA%dB", getNumOfA(), getNumOfB());
     }
 }

@@ -34,10 +34,8 @@ public class GameController {
 
     private List<GuessRecordResponse> buildHistory(List<GameRecord> historyGameRecords) {
         return historyGameRecords.stream()
-                .map(gameRecord -> GuessRecordResponse.builder()
-                        .userGuess(gameRecord.getUserGuess())
-                        .compareResult(gameRecord.getCompareResult())
-                        .build())
+                .map(GuessRecordResponse::getResponse)
                 .collect(Collectors.toList());
     }
+
 }

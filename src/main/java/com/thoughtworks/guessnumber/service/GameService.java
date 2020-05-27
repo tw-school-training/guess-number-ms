@@ -3,7 +3,6 @@ package com.thoughtworks.guessnumber.service;
 import com.thoughtworks.guessnumber.Game;
 import com.thoughtworks.guessnumber.Generator;
 import com.thoughtworks.guessnumber.Outcome;
-import com.thoughtworks.guessnumber.Result;
 import com.thoughtworks.guessnumber.entity.GameRecord;
 import com.thoughtworks.guessnumber.mapper.GameRecordMapper;
 import org.springframework.stereotype.Service;
@@ -44,16 +43,12 @@ public class GameService {
                 .userGuess(userAnswer)
                 .isWinning(outcome.isWinning())
                 .leftTimes(outcome.getLeftTimes())
-                .compareResult(buildResult(outcome.getCompareResult()))
+                .compareResult(outcome.getCompareResult().buildResult())
                 .build();
 
         gameRecordMapper.save(gameRecord);
 
         return gameRecord;
-    }
-
-    private String buildResult(Result compareResult) {
-        return String.format("%dA%dB", compareResult.getNumOfA(), compareResult.getNumOfB());
     }
 
     public List<GameRecord> findGameRecords() {

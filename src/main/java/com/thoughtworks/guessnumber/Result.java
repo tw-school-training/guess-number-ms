@@ -13,4 +13,8 @@ import lombok.Setter;
 public class Result {
     private int numOfA;
     private int numOfB;
+
+    public String buildResult() {
+        return String.format("%dA%dB", getNumOfA(), getNumOfB());
+    }
 }

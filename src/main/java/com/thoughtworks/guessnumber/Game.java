@@ -30,7 +30,7 @@ public class Game {
 
         guessTimes++;
         Result result = rule.compare(answer);
-        boolean winning = result.getNumOfA() == 4;
+        boolean winning = result.isWinning();
         int leftTimes = MAX_GUESS_TIMES - guessTimes;
         isGameOver = winning || leftTimes == 0;
 

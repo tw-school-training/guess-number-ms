@@ -17,4 +17,8 @@ public class Result {
     public String render() {
         return String.format("%dA%dB", getNumOfA(), getNumOfB());
     }
+
+    boolean isWinning() {
+        return getNumOfA() == 4;
+    }
 }

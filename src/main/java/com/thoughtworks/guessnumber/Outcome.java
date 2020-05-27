@@ -10,12 +10,13 @@ import lombok.Setter;
 @Setter(AccessLevel.NONE)
 public class Outcome {
 
-    private boolean isWinning;
-
     private Result compareResult;
 
     private String userGuess;
 
     private int leftTimes;
 
+    public boolean isWinning() {
+        return compareResult.isWinning();
+    }
 }

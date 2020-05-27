@@ -41,7 +41,7 @@ public class GameServiceTest {
         GameRecordMapper gameRecordMapper = Mockito.mock(GameRecordMapper.class);
         Game game = Mockito.mock(Game.class);
         String gameRound = UUID.randomUUID().toString();
-        Outcome outcome = Outcome.builder().leftTimes(4).userGuess(userAnswer).isWinning(false)
+        Outcome outcome = Outcome.builder().leftTimes(4).userGuess(userAnswer)
                 .compareResult(Result.builder().numOfA(1).numOfB(1).build()).build();
         Mockito.when(game.guess(userAnswer)).thenReturn(outcome);
 

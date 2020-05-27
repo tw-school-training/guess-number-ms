@@ -28,7 +28,7 @@ public class GameController {
                 .leftTimes(gameRecord.getLeftTimes())
                 .compareResult(gameRecord.getCompareResult())
                 .userGuess(gameRecord.getUserGuess())
-                .isWinning(gameRecord.getIsWinning())
+                .isWinning(gameRecord.isWinning())
                 .build();
     }
 

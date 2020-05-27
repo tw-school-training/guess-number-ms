@@ -29,7 +29,7 @@ public class GameServiceTest {
         Assert.assertNotNull(gameRecord.getId());
         Assert.assertNotNull(gameRecord.getTicket());
         Assert.assertNotNull(gameRecord.getLeftTimes());
-        Assert.assertNotNull(gameRecord.getIsWinning());
+        Assert.assertNotNull(gameRecord.isWinning());
         Assert.assertNotNull(gameRecord.getCompareResult());
         Assert.assertEquals(userAnswer, gameRecord.getUserGuess());
 
@@ -57,7 +57,7 @@ public class GameServiceTest {
         Assert.assertNotNull(gameRecord.getId());
         Assert.assertEquals(ticket, gameRecord.getTicket());
         Assert.assertEquals(outcome.getLeftTimes(), gameRecord.getLeftTimes().intValue());
-        Assert.assertEquals(outcome.isWinning(), gameRecord.getIsWinning());
+        Assert.assertEquals(outcome.isWinning(), gameRecord.isWinning());
         Assert.assertEquals("1A1B", gameRecord.getCompareResult());
         Assert.assertEquals(outcome.getUserGuess(), gameRecord.getUserGuess());
     }

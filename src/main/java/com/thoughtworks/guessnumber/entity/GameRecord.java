@@ -9,7 +9,7 @@ public class GameRecord {
     private String id;
     private String ticket;
     private Integer leftTimes;
-    private Boolean isWinning;
+    private boolean isWinning;
     private String compareResult;
     private String userGuess;
 

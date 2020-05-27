@@ -27,8 +27,7 @@ public class GameService {
     @Transactional
     public GameRecord guess(String userAnswer) {
         if (game == null) {
-            game = new Game(new Generator());
-            ticket = UUID.randomUUID().toString();
+            startGame();
         }
 
         Outcome outcome = game.guess(userAnswer);
@@ -38,7 +37,7 @@ public class GameService {
         gameRecordMapper.save(gameRecord);
 
         if (game.isGameOver()) {
-            game = null;
+            exitGame();
         }
         return gameRecord;
     }
@@ -56,5 +55,14 @@ public class GameService {
                 .leftTimes(outcome.getLeftTimes())
                 .compareResult(outcome.getCompareResult().render())
                 .build();
+    }
+
+    private void startGame() {
+        game = new Game(new Generator());
+        ticket = UUID.randomUUID().toString();
+    }
+
+    private void exitGame() {
+        game = null;
     }
 }

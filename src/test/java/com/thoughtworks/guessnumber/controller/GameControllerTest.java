@@ -1,0 +1,60 @@
+package com.thoughtworks.guessnumber.controller;
+
+import com.thoughtworks.guessnumber.dto.GameRecordResponse;
+import com.thoughtworks.guessnumber.entity.GameRecord;
+import com.thoughtworks.guessnumber.mapper.GameRecordMapper;
+import com.thoughtworks.guessnumber.service.GameService;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
+import org.mybatis.spring.boot.autoconfigure.MybatisLanguageDriverAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+@SpringBootTest
+@RunWith(SpringRunner.class)
+@ActiveProfiles("test")
+@AutoConfigureMockMvc
+public class GameControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private GameService gameService;
+
+    @Test
+    public void should_return_game_record_response_when_guess() throws Exception {
+        GameRecord gameRecord = GameRecord.builder()
+                .ticket("ticket")
+                .userGuess("1234")
+                .leftTimes(4)
+                .compareResult("1A2B")
+                .isWinning(false)
+                .id("id")
+                .build();
+        Mockito.when(gameService.guess(Mockito.anyString())).thenReturn(gameRecord);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/guess").queryParam("user-answer", "1234"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.userGuess", Matchers.is(gameRecord.getUserGuess())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.compareResult", Matchers.is(gameRecord.getCompareResult())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.leftTimes", Matchers.is(gameRecord.getLeftTimes())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.isWinning", Matchers.is(gameRecord.isWinning())));
+    }
+
+
+
+}

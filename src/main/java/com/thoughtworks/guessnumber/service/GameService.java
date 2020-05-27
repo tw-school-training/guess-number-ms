@@ -37,14 +37,7 @@ public class GameService {
             game = null;
         }
 
-        GameRecord gameRecord = GameRecord.builder()
-                .id(UUID.randomUUID().toString())
-                .ticket(ticket)
-                .userGuess(userAnswer)
-                .isWinning(outcome.isWinning())
-                .leftTimes(outcome.getLeftTimes())
-                .compareResult(outcome.getCompareResult().render())
-                .build();
+        GameRecord gameRecord = getGameRecord(userAnswer, outcome);
 
         gameRecordMapper.save(gameRecord);
 
@@ -53,5 +46,16 @@ public class GameService {
 
     public List<GameRecord> findGameRecords() {
         return gameRecordMapper.findGameRecordsByTicket(ticket);
+    }
+
+    private GameRecord getGameRecord(String userAnswer, Outcome outcome) {
+        return GameRecord.builder()
+                .id(UUID.randomUUID().toString())
+                .ticket(ticket)
+                .userGuess(userAnswer)
+                .isWinning(outcome.isWinning())
+                .leftTimes(outcome.getLeftTimes())
+                .compareResult(outcome.getCompareResult().render())
+                .build();
     }
 }

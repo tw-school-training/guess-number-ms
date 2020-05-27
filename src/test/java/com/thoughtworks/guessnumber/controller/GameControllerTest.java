@@ -1,20 +1,13 @@
 package com.thoughtworks.guessnumber.controller;
 
-import com.thoughtworks.guessnumber.dto.GameRecordResponse;
 import com.thoughtworks.guessnumber.entity.GameRecord;
-import com.thoughtworks.guessnumber.mapper.GameRecordMapper;
 import com.thoughtworks.guessnumber.service.GameService;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
-import org.mybatis.spring.boot.autoconfigure.MybatisLanguageDriverAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;

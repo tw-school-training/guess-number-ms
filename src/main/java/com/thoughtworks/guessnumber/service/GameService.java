@@ -32,15 +32,14 @@ public class GameService {
         }
 
         Outcome outcome = game.guess(userAnswer);
-
-        if (game.isGameOver()) {
-            game = null;
-        }
-
+        
         GameRecord gameRecord = getGameRecord(userAnswer, outcome);
 
         gameRecordMapper.save(gameRecord);
 
+        if (game.isGameOver()) {
+            game = null;
+        }
         return gameRecord;
     }
 

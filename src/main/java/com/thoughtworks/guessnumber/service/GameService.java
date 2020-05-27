@@ -31,9 +31,7 @@ public class GameService {
         }
 
         Outcome outcome = game.guess(userAnswer);
-        
         GameRecord gameRecord = getGameRecord(userAnswer, outcome);
-
         gameRecordMapper.save(gameRecord);
 
         if (game.isGameOver()) {

@@ -26,18 +26,26 @@ public class GameService {
 
     @Transactional
     public GameRecord guess(String userAnswer) {
-        if (game == null) {
-            startGame();
-        }
+        startGameIf();
 
         Outcome outcome = game.guess(userAnswer);
         GameRecord gameRecord = getGameRecord(userAnswer, outcome);
         gameRecordMapper.save(gameRecord);
 
+        exitGameIf();
+        return gameRecord;
+    }
+
+    private void exitGameIf() {
         if (game.isGameOver()) {
             exitGame();
         }
-        return gameRecord;
+    }
+
+    private void startGameIf() {
+        if (game == null) {
+            startGame();
+        }
     }
 
     public List<GameRecord> findGameRecords() {

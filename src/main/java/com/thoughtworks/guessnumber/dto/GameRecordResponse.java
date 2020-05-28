@@ -13,7 +13,7 @@ public class GameRecordResponse {
     private Integer leftTimes;
     private Boolean isWinning;
    
-    public static GameRecordResponse getResponse(GameRecord gameRecord) {
+    public static GameRecordResponse of(GameRecord gameRecord) {
         return GameRecordResponse.builder()
                 .leftTimes(gameRecord.getLeftTimes())
                 .compareResult(gameRecord.getCompareResult())

@@ -24,13 +24,13 @@ public class GameController {
     public GameRecordResponse guess(@RequestParam("user-answer") String answer) {
         GameRecord gameRecord = gameService.guess(answer);
 
-        return GameRecordResponse.getResponse(gameRecord);
+        return GameRecordResponse.of(gameRecord);
     }
 
     @GetMapping("/find-guess-history")
     public List<GuessRecordResponse> findGuessHistory() {
         return gameService.findGameRecords().stream()
-                .map(GuessRecordResponse::getResponse)
+                .map(GuessRecordResponse::of)
                 .collect(Collectors.toList());
     }
 

@@ -10,7 +10,7 @@ public class GuessRecordResponse {
     private String userGuess;
     private String compareResult;
 
-    public static GuessRecordResponse getResponse(GameRecord gameRecord) {
+    public static GuessRecordResponse of(GameRecord gameRecord) {
         return GuessRecordResponse.builder()
                 .userGuess(gameRecord.getUserGuess())
                 .compareResult(gameRecord.getCompareResult())

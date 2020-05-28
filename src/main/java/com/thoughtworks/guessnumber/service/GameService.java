@@ -51,7 +51,7 @@ public class GameService {
                 .userGuess(userAnswer)
                 .isWinning(outcome.isWinning())
                 .leftTimes(outcome.getLeftTimes())
-                .compareResult(outcome.getCompareResult().render())
+                .compareResult(outcome.getCompareResult().toString())
                 .build();
     }
 

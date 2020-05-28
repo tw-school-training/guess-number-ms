@@ -15,7 +15,8 @@ public class Result {
     private int numOfA;
     private int numOfB;
 
-    public String render() {
+    @Override
+    public String toString() {
         return String.format("%dA%dB", getNumOfA(), getNumOfB());
     }
 

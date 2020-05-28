@@ -38,13 +38,14 @@ public class GameService {
 
     private void exitGameIf() {
         if (game.isGameOver()) {
-            exitGame();
+            game = null;
         }
     }
 
     private void startGameIf() {
         if (game == null) {
-            startGame();
+            game = new Game(new Generator());
+            gameRound = UUID.randomUUID().toString();
         }
     }
 
@@ -63,12 +64,4 @@ public class GameService {
                 .build();
     }
 
-    private void startGame() {
-        game = new Game(new Generator());
-        gameRound = UUID.randomUUID().toString();
-    }
-
-    private void exitGame() {
-        game = null;
-    }
 }

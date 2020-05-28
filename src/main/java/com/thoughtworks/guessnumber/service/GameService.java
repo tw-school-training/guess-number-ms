@@ -29,7 +29,7 @@ public class GameService {
         startGameIf();
 
         Outcome outcome = game.guess(userAnswer);
-        GameRecord gameRecord = getGameRecord(userAnswer, outcome);
+        GameRecord gameRecord = buildGameRecord(userAnswer, outcome);
         gameRecordMapper.save(gameRecord);
 
         exitGameIf();
@@ -53,7 +53,7 @@ public class GameService {
         return gameRecordMapper.findGameRecordsByGameRound(gameRound);
     }
 
-    private GameRecord getGameRecord(String userAnswer, Outcome outcome) {
+    private GameRecord buildGameRecord(String userAnswer, Outcome outcome) {
         return GameRecord.builder()
                 .id(UUID.randomUUID().toString())
                 .gameRound(gameRound)

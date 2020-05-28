@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class GameRecord {
     private String id;
-    private String gameRound;
+    private String round;
     private Integer leftTimes;
     private boolean isWinning;
     private String compareResult;

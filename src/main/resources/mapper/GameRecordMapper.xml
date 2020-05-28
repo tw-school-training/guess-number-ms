@@ -5,11 +5,11 @@
 <mapper namespace="com.thoughtworks.guessnumber.mapper.GameRecordMapper">
 
     <insert id="save" parameterType="com.thoughtworks.guessnumber.entity.GameRecord">
-        insert into game_record (id, game_round, left_times, is_winning, compare_result, user_guess)
-        values(#{id}, #{gameRound}, #{leftTimes}, #{isWinning}, #{compareResult}, #{userGuess})
+        insert into game_record (id, round, left_times, is_winning, compare_result, user_guess)
+        values(#{id}, #{round}, #{leftTimes}, #{isWinning}, #{compareResult}, #{userGuess})
     </insert>
 
-    <select id="findGameRecordsByGameRound" parameterType="string" resultType="com.thoughtworks.guessnumber.entity.GameRecord">
-        select * from game_record where game_round = #{0}
+    <select id="findGameRecordsByRound" parameterType="string" resultType="com.thoughtworks.guessnumber.entity.GameRecord">
+        select * from game_record where round = #{0}
     </select>
 </mapper>

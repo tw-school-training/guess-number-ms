@@ -62,7 +62,7 @@ public class GameControllerTest {
 
     private GameRecord buildGameRecord() {
         return GameRecord.builder()
-                .gameRound("gameRound")
+                .round("gameRound")
                 .userGuess("1234")
                 .leftTimes(4)
                 .compareResult("1A2B")

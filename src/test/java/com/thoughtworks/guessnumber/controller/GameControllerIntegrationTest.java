@@ -40,7 +40,7 @@ public class GameControllerIntegrationTest {
 
     @Before
     public void setUp() {
-        ReflectionTestUtils.setField(gameService, "gameRound", "gameRound");
+        ReflectionTestUtils.setField(gameService, "round", "round");
     }
 
     @Test

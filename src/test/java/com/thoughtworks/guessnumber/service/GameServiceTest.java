@@ -27,7 +27,7 @@ public class GameServiceTest {
 
         Assert.assertNotNull(gameRecord);
         Assert.assertNotNull(gameRecord.getId());
-        Assert.assertNotNull(gameRecord.getGameRound());
+        Assert.assertNotNull(gameRecord.getRound());
         Assert.assertNotNull(gameRecord.getLeftTimes());
         Assert.assertNotNull(gameRecord.isWinning());
         Assert.assertNotNull(gameRecord.getCompareResult());
@@ -40,14 +40,14 @@ public class GameServiceTest {
         String userAnswer = "1234";
         GameRecordMapper gameRecordMapper = Mockito.mock(GameRecordMapper.class);
         Game game = Mockito.mock(Game.class);
-        String gameRound = UUID.randomUUID().toString();
+        String round = UUID.randomUUID().toString();
         Outcome outcome = Outcome.builder().leftTimes(4).userGuess(userAnswer)
                 .compareResult(Result.builder().numOfA(1).numOfB(1).build()).build();
         Mockito.when(game.guess(userAnswer)).thenReturn(outcome);
 
         GameService gameService = new GameService(gameRecordMapper);
         ReflectionTestUtils.setField(gameService, "game", game);
-        ReflectionTestUtils.setField(gameService, "gameRound", gameRound);
+        ReflectionTestUtils.setField(gameService, "round", round);
 
         GameRecord gameRecord = gameService.guess(userAnswer);
 
@@ -55,7 +55,7 @@ public class GameServiceTest {
 
         Assert.assertNotNull(gameRecord);
         Assert.assertNotNull(gameRecord.getId());
-        Assert.assertEquals(gameRound, gameRecord.getGameRound());
+        Assert.assertEquals(round, gameRecord.getRound());
         Assert.assertEquals(outcome.getLeftTimes(), gameRecord.getLeftTimes().intValue());
         Assert.assertEquals(outcome.isWinning(), gameRecord.isWinning());
         Assert.assertEquals("1A1B", gameRecord.getCompareResult());
@@ -68,7 +68,7 @@ public class GameServiceTest {
         List<GameRecord> expectedGameRecords = List.of(
                 GameRecord.builder().build()
         );
-        Mockito.when(gameRecordMapper.findGameRecordsByGameRound(Mockito.any())).thenReturn(expectedGameRecords);
+        Mockito.when(gameRecordMapper.findGameRecordsByRound(Mockito.any())).thenReturn(expectedGameRecords);
 
         GameService gameService = new GameService(gameRecordMapper);
         List<GameRecord> gameRecords = gameService.findGameRecords();

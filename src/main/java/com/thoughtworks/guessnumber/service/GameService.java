@@ -16,7 +16,7 @@ public class GameService {
 
     private GameRecordMapper gameRecordMapper;
 
-    private String gameRound;
+    private String round;
 
     private Game game;
 
@@ -45,18 +45,18 @@ public class GameService {
     private void startGameIf() {
         if (game == null) {
             game = new Game(new Generator());
-            gameRound = UUID.randomUUID().toString();
+            round = UUID.randomUUID().toString();
         }
     }
 
     public List<GameRecord> findGameRecords() {
-        return gameRecordMapper.findGameRecordsByGameRound(gameRound);
+        return gameRecordMapper.findGameRecordsByRound(round);
     }
 
     private GameRecord buildGameRecord(String userAnswer, Outcome outcome) {
         return GameRecord.builder()
                 .id(UUID.randomUUID().toString())
-                .gameRound(gameRound)
+                .round(round)
                 .userGuess(userAnswer)
                 .isWinning(outcome.isWinning())
                 .leftTimes(outcome.getLeftTimes())
